@@ -39,12 +39,20 @@
                     <br/>
                 </div>
             </div>
+            <div class="row mt-5">
+                <button class="min-vw-50 btn btn-primary" onclick="rolladen_runter();">Rolladen Runter</button>
+            </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-0"></div>
 
     </div>
 </div>
 <script>
+    function rolladen_runter(){
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", {{ url_for("rolladen_runter") }}, true);
+        xhr.send(null);
+    }
     function toggle_light(){
         let xhr = new XMLHttpRequest();
         xhr.open("POST", {{ url_for("toggle_light") }}, true);

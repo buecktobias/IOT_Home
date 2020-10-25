@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template, url_for, redirect
+from rolladen import down_living_room_big
 import requests
 import time
 app = Flask(__name__)
@@ -61,6 +62,11 @@ def get_status_light():
         return "ON"
     else:
         return "OFF"
+
+@app.route("/rolladen_living_room1/", methods=["POST"])
+def rolladen_runter():
+    down_living_room_big()
+    return ""
 
 @app.route("/get_status_steckdose/")
 def get_status_steckdose():
