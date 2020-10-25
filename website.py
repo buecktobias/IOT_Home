@@ -10,17 +10,17 @@ try:
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
-except Exception as e:
+except BaseException as e:
     pass
 
 def get_browser_and_action():
     browser = None
     try:
         browser = webdriver.Firefox()
-    except Exception as e:
+    except BaseException as e:
         try:
             browser = webdriver.Chrome()
-        except Exception as e:
+        except BaseException as e:
             pass
         pass
     if browser is None:
@@ -119,8 +119,8 @@ def get_status_light():
 def rolladen_runter():
     try:
         down_living_room_big()
-    except Exception as e:
-        return str(e)
+    except BaseException as e:
+        pass
     return ""
 
 @app.route("/get_status_steckdose/")
@@ -137,7 +137,7 @@ def run_website():
     #TODO try
     try:
         subprocess.call("sudo apt-get install Iceweasel", shell=True)
-    except Exception as e:
+    except BaseException as e:
         pass
     app.run(host="0.0.0.0", port=5001, debug=True)
 
