@@ -10,17 +10,17 @@ try:
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
-except:
+except Exception as e:
     pass
 
 def get_browser_and_action():
     browser = None
     try:
         browser = webdriver.Firefox()
-    except:
+    except Exception:
         try:
             browser = webdriver.Chrome()
-        except:
+        except Exception:
             pass
         pass
     if browser is None:
@@ -137,7 +137,7 @@ def run_website():
     #TODO try
     try:
         subprocess.call("sudo apt-get install Iceweasel", shell=True)
-    except:
+    except Exception:
         pass
     app.run(host="0.0.0.0", port=5001)
 
