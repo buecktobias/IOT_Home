@@ -120,7 +120,7 @@ def rolladen_runter():
     try:
         down_living_room_big()
     except Exception as e:
-        return str(e.with_traceback())
+        return str(e)
     return ""
 
 @app.route("/get_status_steckdose/")
