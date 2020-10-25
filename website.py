@@ -66,9 +66,12 @@ def get_status_light():
     else:
         return "OFF"
 
-@app.route("/rolladen_living_room1/", methods=["POST"])
+@app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
-    rolladen.down_living_room_big()
+    try:
+        rolladen.down_living_room_big()
+    except Exception as e:
+        return str(e)
     return ""
 
 @app.route("/get_status_steckdose/")
