@@ -4,12 +4,14 @@ from flask import render_template, url_for, redirect
 import requests
 import time
 app = Flask(__name__)
-from selenium import webdriver
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
+try:
+    from selenium import webdriver
+    from selenium.webdriver import ActionChains
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+except:
+    pass
 
 def get_browser_and_action():
     browser = None
