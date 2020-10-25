@@ -73,7 +73,10 @@ def get_status_steckdose():
 def run_website():
     import subprocess
     #TODO try
-    subprocess.call("sudo apt-get install Iceweasel", shell=True)
+    try:
+        subprocess.call("sudo apt-get install Iceweasel", shell=True)
+    except:
+        pass
     app.run(host="0.0.0.0", port=5001)
 
 
