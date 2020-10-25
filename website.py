@@ -75,5 +75,6 @@ def run_website():
 
 
 if __name__ == '__main__':
+    print("LOL")
     app.run(host="0.0.0.0", port=5001)
 
