@@ -78,7 +78,6 @@ def get_status_steckdose():
 
 
 def run_website():
-    import subprocess
     """    #TODO try
     try:
         subprocess.call("sudo apt-get install Iceweasel", shell=True)
