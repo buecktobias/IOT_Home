@@ -17,10 +17,10 @@ def get_browser_and_action():
     browser = None
     try:
         browser = webdriver.Firefox()
-    except Exception:
+    except Exception as e:
         try:
             browser = webdriver.Chrome()
-        except Exception:
+        except Exception as e:
             pass
         pass
     if browser is None:
@@ -139,7 +139,7 @@ def run_website():
         subprocess.call("sudo apt-get install Iceweasel", shell=True)
     except Exception as e:
         pass
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5001, debug=True)
 
 
 if __name__ == '__main__':
