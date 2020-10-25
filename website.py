@@ -120,7 +120,7 @@ def rolladen_runter():
     try:
         down_living_room_big()
     except Exception as e:
-        return str(e)
+        return str(e.with_traceback())
     return ""
 
 @app.route("/get_status_steckdose/")
@@ -137,7 +137,7 @@ def run_website():
     #TODO try
     try:
         subprocess.call("sudo apt-get install Iceweasel", shell=True)
-    except Exception:
+    except Exception as e:
         pass
     app.run(host="0.0.0.0", port=5001)
 
