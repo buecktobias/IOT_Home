@@ -3,23 +3,26 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-browser = None
-try:
-    browser = webdriver.Firefox()
-except:
+
+
+def get_browser_and_action():
+    browser = None
     try:
-        browser = webdriver.Chrome()
+        browser = webdriver.Firefox()
     except:
+        try:
+            browser = webdriver.Chrome()
+        except:
+            pass
         pass
-    pass
-if browser is None:
-    raise("No browser!")
+    if browser is None:
+        raise("No browser!")
+    browser.implicitly_wait(3)
+    action = ActionChains(browser)
+    return browser, action
 
-browser.implicitly_wait(3)
 
-action = ActionChains(browser)
-
-def get_rolladen_big():
+def get_rolladen_big(browser, action):
     login_url = "http://192.168.178.23/login.htm"
     browser.get(login_url)
     admin_button = "/html/body/table/tbody/tr[2]/td/div/table/tbody/tr[1]/td[1]/table/tbody/tr/td/div"
@@ -37,7 +40,8 @@ def get_rolladen_big():
 
 
 def down_living_room_big():
-    browser = get_rolladen_big()
+    browser, action = get_browser_and_action()
+    browser = get_rolladen_big(browser, action)
     id_down = "/html/body/div[9]/div/div[3]/table/tbody/tr/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[5]/table/tbody/tr/td/table/tbody/tr/td[4]/table/tbody/tr[2]/td/table"
     wait = WebDriverWait(browser, 10)
     rolladen = wait.until(EC.element_to_be_clickable((By.XPATH, id_down)))
