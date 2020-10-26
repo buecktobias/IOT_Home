@@ -11,11 +11,15 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.firefox.options import Options
+
 
 
 def get_browser_and_action():
     try:
-        browser = webdriver.Firefox()
+        options = Options()
+        options.headless = True
+        browser = webdriver.Firefox(options=options)
     except Exception as e:
         print(e)
         browser = webdriver.Chrome(executable_path="/usr/bin/chromedriver")
