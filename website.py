@@ -1,30 +1,18 @@
 from flask import Flask
-from flask import render_template, url_for, redirect
+from flask import render_template, redirect
 
 import requests
 import time
 app = Flask(__name__)
-try:
-    from selenium import webdriver
-    from selenium.webdriver import ActionChains
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
-except BaseException as e:
-    pass
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 def get_browser_and_action():
-    browser = None
-    try:
-        browser = webdriver.Firefox()
-    except BaseException as e:
-        try:
-            browser = webdriver.Chrome()
-        except BaseException as e:
-            pass
-        pass
-    if browser is None:
-        raise("No browser!")
+    browser = webdriver.Firefox()
     browser.implicitly_wait(3)
     action = ActionChains(browser)
     return browser, action
@@ -120,7 +108,7 @@ def rolladen_runter():
     try:
         down_living_room_big()
     except BaseException as e:
-        pass
+        return e
     return ""
 
 @app.route("/get_status_steckdose/")
