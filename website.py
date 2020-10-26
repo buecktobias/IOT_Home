@@ -111,8 +111,7 @@ def get_status_light():
 
 @app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
-    th = threading.Thread(target=down_living_room_big)
-    th.start()
+    down_living_room_big()
     return ""
 
 @app.route("/get_status_steckdose/")
