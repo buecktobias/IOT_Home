@@ -45,14 +45,11 @@ def get_rolladen_big(browser, action):
     return browser
 
 
-def down_living_room_big():
-    browser, action = get_browser_and_action()
-    browser = get_rolladen_big(browser, action)
+def down_living_room_big(browser):
     id_down = "/html/body/div[9]/div/div[3]/table/tbody/tr/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[5]/table/tbody/tr/td/table/tbody/tr/td[4]/table/tbody/tr[2]/td/table"
     wait = WebDriverWait(browser, 10)
     rolladen = wait.until(EC.element_to_be_clickable((By.XPATH, id_down)))
     rolladen.click()
-    browser.close()
 
 
 address_light = "http://192.168.178.131/?m=1&o=1"
@@ -60,7 +57,8 @@ address_steckdose = "http://192.168.178.132/?m=1&o=1"
 
 WEBSITE_LIGHT = "http://192.168.178.131/"
 WEBSITE_STECKDOSE = "http://192.168.178.132"
-
+browser, action = get_browser_and_action()
+browser = get_rolladen_big(browser, action)
 
 def toggle_steckdose():
     requests.get(address_steckdose)
@@ -116,7 +114,7 @@ def get_status_light():
 
 @app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
-    down_living_room_big()
+    down_living_room_big(browser)
     return ""
 
 @app.route("/get_status_steckdose/")
