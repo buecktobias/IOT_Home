@@ -1,3 +1,5 @@
+import threading
+
 from flask import Flask
 from flask import render_template, redirect
 
@@ -103,9 +105,11 @@ def get_status_light():
     else:
         return "OFF"
 
+
 @app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
-    down_living_room_big()
+    th = threading.Thread(target=down_living_room_big)
+    th.start()
     return ""
 
 @app.route("/get_status_steckdose/")
