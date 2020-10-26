@@ -17,7 +17,7 @@ def get_browser_and_action():
     try:
         browser = webdriver.Firefox()
     except:
-        browser =webdriver.Chrome()
+        browser = webdriver.Chrome(executable_path="/usr/bin/chromedriver")
     browser.implicitly_wait(3)
     action = ActionChains(browser)
     return browser, action
