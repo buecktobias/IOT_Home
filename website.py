@@ -14,7 +14,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 def get_browser_and_action():
-    browser = webdriver.Firefox()
+    try:
+        browser = webdriver.Firefox()
+    except:
+        browser =webdriver.Chrome()
     browser.implicitly_wait(3)
     action = ActionChains(browser)
     return browser, action
@@ -108,7 +111,6 @@ def get_status_light():
 
 @app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
-    print("HAHAHAHHAHAHHAHAHAHAHHAHHAHHAHHA")
     th = threading.Thread(target=down_living_room_big)
     th.start()
     return ""
