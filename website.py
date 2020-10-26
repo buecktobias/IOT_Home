@@ -15,7 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def get_browser_and_action():
     try:
-        browser = webdriver.Firefox(executable_path="/usr/bin/geckodriver")
+        browser = webdriver.Firefox()
     except Exception as e:
         print(e)
         browser = webdriver.Chrome(executable_path="/usr/bin/chromedriver")
