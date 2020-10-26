@@ -70,8 +70,8 @@
         xhr.send(null);
         status.innerText = xhr.responseText
     }
-    setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 10_000);
-    setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 10_000);
+    setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 100_000);
+    setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 100_000);
 </script>
 </body>
 </html>
