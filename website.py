@@ -108,6 +108,7 @@ def get_status_light():
 
 @app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
+    print("HAHAHAHHAHAHHAHAHAHAHHAHHAHHAHHA")
     th = threading.Thread(target=down_living_room_big)
     th.start()
     return ""
