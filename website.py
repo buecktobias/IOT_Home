@@ -124,7 +124,6 @@ def get_status_steckdose():
 
 
 def run_website():
-    raise("Not now!")
     import subprocess
     #TODO try
     try:
