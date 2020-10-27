@@ -1,0 +1,14 @@
+{% extends "smart_home_device_basis.html" %}
+{% block title %}Terassen Steckdose{% endblock %}
+{% block content %}
+    <div class="col-md-2 col-12">
+        <h3 id="status_steckdose"></h3>
+    </div>
+    <div class="col-md-10 col-12">
+        <button onclick="toggle_steckdose();" class="min-vw-50 btn btn-primary"><h4>Anschalten</h4>
+        </button>
+        <br/>
+        <a href="{{ url_for("steckdose_website") }}">Zur Webseite</a>
+        <br/>
+    </div>
+{% endblock %}

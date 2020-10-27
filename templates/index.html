@@ -16,51 +16,42 @@
             <h1 class="mb-2 mt-2">Bücksches Smart Home</h1>
             <hr/>
 
-            {% include "terassen_light.html" %}
-            <div class="row mt-5">
-                <h3>Steckdose</h3>
-
-            </div>
-            <h4 id="rolladen_loading"></h4>
-            <div class="row mt-5">
-                <button class="min-vw-50 mx-1 btn btn-primary" onclick="rolladen_stop();"><h4>Stopp</h4></button>
-                <button class="min-vw-50 mx-1 btn btn-primary" onclick="rolladen_runter();"><h4>Rolladen Runter</h4></button>
-                <button class="min-vw-50 mx-1 btn btn-primary" onclick="rolladen_hoch();"><h4>Rolladen Hoch</h4></button>
-            </div>
+            {% include "light_terasse.html" %}
+            {% include "steckdose_terassen.html" %}
+            {%  include "rolladen_big_living_room.html" %}
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-0"></div>
 
     </div>
 </div>
 <script>
-    function rolladen_stop(){
+
+    function getUrl(url){
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", {{ url_for("rolladen_stop") }}, true);
+        xhr.open("GET", url, true);
         xhr.send(null);
     }
-    function rolladen_hoch(){
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", {{ url_for("rolladen_hoch") }}, true);
-        xhr.send(null);
+
+    function rolladen_big_living_room_stop(){
+        getUrl("{{ url_for("rolladen_stop") }}")
     }
-    function rolladen_runter(){
+
+    function rolladen_big_living_room_hoch(){
+        let xhr = new XMLHttpRequest();
+        getUrl( {{ url_for("rolladen_hoch") }});
+    }
+
+    function rolladen_big_living_room_runter(){
         updateStatus("{{ url_for("is_rolladen_loaded") }}", "rolladen_loading")
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", {{ url_for("rolladen_runter") }}, true);
-        xhr.send(null);
+        getUrl({{ url_for("rolladen_runter") }});
     }
+
     function toggle_light(){
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", {{ url_for("toggle_light") }}, true);
-        xhr.send(null);
-        updateStatus("{{ url_for("get_status_light") }}", "status_light");
+        getUrl({{ url_for("toggle_light") }})
     }
+
     function toggle_steckdose() {
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", {{ url_for("toggle_steckdose_url") }}, true);
-        xhr.send(null);
-        var l = xhr.responseText
-        updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");
+        getUrl({{ url_for("toggle_steckdose_url") }});
     }
     function updateStatus(url, id){
         let status = document.getElementById(id)
