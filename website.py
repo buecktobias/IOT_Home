@@ -1,3 +1,4 @@
+import threading
 from flask import Flask
 from flask import render_template, redirect
 from rolladen import *
@@ -6,14 +7,8 @@ import requests
 import time
 app = Flask(__name__)
 
-
-browser, action = get_browser_and_action()
-devises = get_devises(browser, action)
-browser = get_rolladen_big_living_room(browser, action)
-
-
-
-
+r = None
+rolladen_loader = None
 
 @app.route("/terassen_licht/")
 def terassenlicht_website():
@@ -50,8 +45,19 @@ def get_status_light():
 
 @app.route("/rolladen/", methods=["POST", "GET"])
 def rolladen_runter():
-    down_living_room_big(browser)
+    global r, rolladen_loader
+    if r is not None and not rolladen_loader.is_alive():
+        r.down_living_room_big()
     return ""
+
+
+@app.route("/rolladen_loading/", methods=["POST", "GET"])
+def is_rolladen_loaded():
+    global rolladen_loader
+    if rolladen_loader.is_alive():
+        return "is still Loading"
+    else:
+        return "is ready!"
 
 @app.route("/get_status_steckdose/")
 def get_status_steckdose():
@@ -62,7 +68,20 @@ def get_status_steckdose():
         return "OFF"
 
 
+def load_rolladen():
+    global r
+    r = Rolladen()
+
+
+def initialize_website():
+    global rolladen_loader
+    rolladen_loader = threading.Thread(target=load_rolladen)
+    rolladen_loader.start()
+
+
 def run_website():
+    initialize_website()
+    print("Start website")
     app.run(host="0.0.0.0", port=5001)
 
 

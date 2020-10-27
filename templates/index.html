@@ -39,6 +39,7 @@
                     <br/>
                 </div>
             </div>
+            <h4 id="rolladen_loading"></h4>
             <div class="row mt-5">
                 <button class="min-vw-50 btn btn-primary" onclick="rolladen_runter();"><h4>Rolladen Runter</h4></button>
             </div>
@@ -49,6 +50,7 @@
 </div>
 <script>
     function rolladen_runter(){
+        updateStatus("{{ url_for("is_rolladen_loaded") }}", "rolladen_loading")
         let xhr = new XMLHttpRequest();
         xhr.open("GET", {{ url_for("rolladen_runter") }}, true);
         xhr.send(null);
@@ -72,8 +74,9 @@
         xhr.send(null);
         status.innerText = xhr.responseText
     }
-    setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 100_000);
-    setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 100_000);
+    setInterval(function(){ updateStatus("{{ url_for("is_rolladen_loaded") }}", "rolladen_loading")}, 400)
+    setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 10_000);
+    setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 10_000);
 </script>
 </body>
 </html>
