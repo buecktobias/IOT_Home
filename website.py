@@ -1,8 +1,16 @@
 import threading
 from flask import Flask
 from flask import render_template, redirect
-from rolladen import *
-from light_and_steckdose import *
+try:
+    from rolladen import *
+except Exception as e:
+    print(e)
+    from .rolladen import *
+try:
+    from light_and_steckdose import *
+except Exception as e:
+    print(e)
+    from .light_and_steckdose import *
 import requests
 import time
 app = Flask(__name__)
