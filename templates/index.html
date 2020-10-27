@@ -9,26 +9,11 @@
     <title>Unser Smart Home</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-1 col-0"></div>
-        <div class="col-lg-8 col-md-8 col-sm-9 col-12">
-            <h1 class="mb-2 mt-2">Bücksches Smart Home</h1>
-            <hr/>
-
-            {% include "light_terasse.html" %}
-            {% include "steckdose_terassen.html" %}
-            {%  include "rolladen_big_living_room.html" %}
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-0"></div>
-
-    </div>
-</div>
 <script>
 
     function getUrl(url){
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
+        xhr.open("GET", url, false);
         xhr.send(null);
     }
 
@@ -37,21 +22,30 @@
     }
 
     function rolladen_big_living_room_hoch(){
-        let xhr = new XMLHttpRequest();
-        getUrl( {{ url_for("rolladen_big_living_room_up") }});
+        getUrl(" {{ url_for("rolladen_big_living_room_up") }}");
+    }
+    function rolladen_big_living_room_runter(){
+        getUrl( "{{ url_for("rolladen_big_living_room_down") }}");
     }
 
-    function rolladen_big_living_room_runter(){
-        updateStatus("{{ url_for("is_rolladen_big_living_room_loaded") }}", "rolladen_loading")
-        getUrl({{ url_for("rolladen_big_living_room_down") }});
+    function rolladen_small_living_room_runter(){
+        getUrl("{{ url_for("rolladen_small_living_room_down") }}");
     }
+    function rolladen_small_living_room_stop(){
+        getUrl("{{ url_for("rolladen_small_living_room_stop") }}")
+    }
+
+    function rolladen_small_living_room_hoch(){
+        getUrl( "{{ url_for("rolladen_small_living_room_up") }}");
+    }
+
 
     function toggle_light(){
-        getUrl({{ url_for("toggle_light") }})
+        getUrl("{{ url_for("toggle_light") }}")
     }
 
     function toggle_steckdose() {
-        getUrl({{ url_for("toggle_steckdose_url") }});
+        getUrl("{{ url_for("toggle_steckdose_url") }}");
     }
     function updateStatus(url, id){
         let status = document.getElementById(id)
@@ -64,5 +58,22 @@
     setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 10_000);
     setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 10_000);
 </script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-1 col-0"></div>
+        <div class="col-lg-8 col-md-8 col-sm-9 col-12">
+            <h1 class="mb-2 mt-2">Bücksches Smart Home</h1>
+            <hr/>
+
+            {% include "light_terasse.html" %}
+            {% include "steckdose_terassen.html" %}
+            {%  include "rolladen_big_living_room.html" %}
+            {% include "rolladen_small_living_room.html" %}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-0"></div>
+
+    </div>
+</div>
 </body>
 </html>

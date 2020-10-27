@@ -1,6 +1,7 @@
 import threading
 from flask import Flask
 from flask import render_template, redirect
+
 try:
     from rolladen import *
 except Exception as e:
@@ -15,12 +16,14 @@ import requests
 
 app = Flask(__name__)
 
-r:Rolladen = None
+r: Rolladen = None
 rolladen_loader = None
+
 
 @app.route("/terassen_licht/")
 def terassenlicht_website():
     return redirect(WEBSITE_LIGHT)
+
 
 @app.route("/toggle_steckdose/", methods=["POST"])
 def toggle_steckdose_url():
@@ -33,6 +36,7 @@ def toggle_light():
     switch_light()
     return ""
 
+
 @app.route("/steckdose/")
 def steckdose_website():
     return redirect(WEBSITE_STECKDOSE)
@@ -41,6 +45,7 @@ def steckdose_website():
 @app.route('/')
 def hello_world():
     return render_template("index.html")
+
 
 @app.route("/get_status_light/")
 def get_status_light():
@@ -51,26 +56,29 @@ def get_status_light():
         return "OFF"
 
 
-@app.route("rolladen_big_living_room/down/", methods=["POST", "GET"])
+@app.route("/rolladen_big_living_room/down/", methods=["POST", "GET"])
 def rolladen_big_living_room_down():
     global r, rolladen_loader
     if r is not None and not rolladen_loader.is_alive():
         r.rolladen_big_living_room_down()
     return ""
 
-@app.route("rolladen_big_living_room/up/", methods=["POST", "GET"])
+
+@app.route("/rolladen_big_living_room/up/", methods=["POST", "GET"])
 def rolladen_big_living_room_up():
-    global r , rolladen_loader
+    global r, rolladen_loader
     if r is not None and not rolladen_loader.is_alive():
         r.rolladen_big_living_room_up()
     return ""
 
+
 @app.route("/rolladen_big_living_room/stop/", methods=["POST", "GET"])
 def rolladen_big_living_room_stop():
-    global r , rolladen_loader
+    global r, rolladen_loader
     if r is not None and not rolladen_loader.is_alive():
         r.rolladen_big_living_room_stop()
     return ""
+
 
 @app.route("/rolladen_big_living_room/loading/", methods=["POST", "GET"])
 def is_rolladen_big_living_room_loaded():
@@ -79,6 +87,31 @@ def is_rolladen_big_living_room_loaded():
         return "is still Loading"
     else:
         return "is ready!"
+
+
+@app.route("/rolladen_small_living_room/up/", methods=["POST", "GET"])
+def rolladen_small_living_room_up():
+    global r, rolladen_loader
+    if r is not None and not rolladen_loader.is_alive():
+        r.rolladen_small_living_room_up()
+    return ""
+
+
+@app.route("/rolladen_small_living_room/down/", methods=["POST", "GET"])
+def rolladen_small_living_room_down():
+    global r, rolladen_loader
+    if r is not None and not rolladen_loader.is_alive():
+        r.rolladen_small_living_room_down()
+    return ""
+
+
+@app.route("/rolladen_small_living_room/stop/", methods=["POST", "GET"])
+def rolladen_small_living_room_stop():
+    global r, rolladen_loader
+    if r is not None and not rolladen_loader.is_alive():
+        r.rolladen_small_living_room_stop()
+    return ""
+
 
 @app.route("/get_status_steckdose/")
 def get_status_steckdose():
@@ -103,7 +136,7 @@ def initialize_website():
 def run_website():
     initialize_website()
     print("Start website")
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5001, debug=True)
 
 
 if __name__ == '__main__':
