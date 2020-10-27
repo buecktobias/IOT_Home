@@ -48,21 +48,21 @@ class Rolladen():
         action.move_to_element_with_offset(rolladen_big_button, 5, 5).click().perform()
         return browser
 
-    def down_living_room_big(self):
+    def rolladen_big_living_room_down(self):
         browser = self.rolladen_big_browser
         id_down = "/html/body/div[9]/div/div[3]/table/tbody/tr/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[5]/table/tbody/tr/td/table/tbody/tr/td[4]/table/tbody/tr[2]/td/table"
         wait = WebDriverWait(browser, 10)
         rolladen = wait.until(EC.element_to_be_clickable((By.XPATH, id_down)))
         rolladen.click()
 
-    def up_living_room_big(self):
+    def rolladen_big_living_room_up(self):
         browser = self.rolladen_big_browser
         id_up = "/html/body/div[9]/div/div[3]/table/tbody/tr/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[5]/table/tbody/tr/td/table/tbody/tr/td[4]/table/tbody/tr[1]/td/table"
         wait = WebDriverWait(browser, 10)
         rolladen = wait.until(EC.element_to_be_clickable((By.XPATH, id_up)))
         rolladen.click()
 
-    def stop_living_room(self):
+    def rolladen_big_living_room_stop(self):
         browser = self.rolladen_big_browser
         id_stop = "/html/body/div[9]/div/div[3]/table/tbody/tr/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[5]/table/tbody/tr/td/table/tbody/tr/td[3]/div"
         wait = WebDriverWait(browser, 10)

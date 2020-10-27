@@ -33,17 +33,17 @@
     }
 
     function rolladen_big_living_room_stop(){
-        getUrl("{{ url_for("rolladen_stop") }}")
+        getUrl("{{ url_for("rolladen_big_living_room_stop") }}")
     }
 
     function rolladen_big_living_room_hoch(){
         let xhr = new XMLHttpRequest();
-        getUrl( {{ url_for("rolladen_hoch") }});
+        getUrl( {{ url_for("rolladen_big_living_room_up") }});
     }
 
     function rolladen_big_living_room_runter(){
-        updateStatus("{{ url_for("is_rolladen_loaded") }}", "rolladen_loading")
-        getUrl({{ url_for("rolladen_runter") }});
+        updateStatus("{{ url_for("is_rolladen_big_living_room_loaded") }}", "rolladen_loading")
+        getUrl({{ url_for("rolladen_big_living_room_down") }});
     }
 
     function toggle_light(){
@@ -60,7 +60,7 @@
         xhr.send(null);
         status.innerText = xhr.responseText
     }
-    setInterval(function(){ updateStatus("{{ url_for("is_rolladen_loaded") }}", "rolladen_loading")}, 400)
+    setInterval(function(){ updateStatus("{{ url_for("is_rolladen_big_living_room_loaded") }}", "rolladen_loading")}, 400)
     setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 10_000);
     setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 10_000);
 </script>

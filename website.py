@@ -12,10 +12,10 @@ except Exception as e:
     print(e)
     from .light_and_steckdose import *
 import requests
-import time
+
 app = Flask(__name__)
 
-r = None
+r:Rolladen = None
 rolladen_loader = None
 
 @app.route("/terassen_licht/")
@@ -51,29 +51,29 @@ def get_status_light():
         return "OFF"
 
 
-@app.route("/rolladen/", methods=["POST", "GET"])
-def rolladen_runter():
+@app.route("rolladen_big_living_room/down/", methods=["POST", "GET"])
+def rolladen_big_living_room_down():
     global r, rolladen_loader
     if r is not None and not rolladen_loader.is_alive():
-        r.down_living_room_big()
+        r.rolladen_big_living_room_down()
     return ""
 
-@app.route("/rolladen_up/", methods=["POST", "GET"])
-def rolladen_hoch():
+@app.route("rolladen_big_living_room/up/", methods=["POST", "GET"])
+def rolladen_big_living_room_up():
     global r , rolladen_loader
     if r is not None and not rolladen_loader.is_alive():
-        r.up_living_room_big()
+        r.rolladen_big_living_room_up()
     return ""
 
-@app.route("/rolladen_stop/", methods=["POST", "GET"])
-def rolladen_stop():
+@app.route("/rolladen_big_living_room/stop/", methods=["POST", "GET"])
+def rolladen_big_living_room_stop():
     global r , rolladen_loader
     if r is not None and not rolladen_loader.is_alive():
-        r.stop_living_room()
+        r.rolladen_big_living_room_stop()
     return ""
 
-@app.route("/rolladen_loading/", methods=["POST", "GET"])
-def is_rolladen_loaded():
+@app.route("/rolladen_big_living_room/loading/", methods=["POST", "GET"])
+def is_rolladen_big_living_room_loaded():
     global rolladen_loader
     if rolladen_loader.is_alive():
         return "is still Loading"
@@ -109,4 +109,3 @@ def run_website():
 if __name__ == '__main__':
     run_website()
     # app.run(host="0.0.0.0", port=5001)
-
