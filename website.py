@@ -93,6 +93,7 @@ def initialize_website():
 
 
 def run_website():
+    raise(Exception("HAHAH "))
     initialize_website()
     print("Start website")
     app.run(host="0.0.0.0", port=5001)
