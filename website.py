@@ -50,6 +50,19 @@ def rolladen_runter():
         r.down_living_room_big()
     return ""
 
+@app.route("/rolladen_up/", methods=["POST", "GET"])
+def rolladen_hoch():
+    global r , rolladen_loader
+    if r is not None and not rolladen_loader.is_alive():
+        r.up_living_room_big()
+    return ""
+
+@app.route("/rolladen_stop/", methods=["POST", "GET"])
+def rolladen_stop():
+    global r , rolladen_loader
+    if r is not None and not rolladen_loader.is_alive():
+        r.stop_living_room()
+    return ""
 
 @app.route("/rolladen_loading/", methods=["POST", "GET"])
 def is_rolladen_loaded():

@@ -68,3 +68,4 @@ class Rolladen():
         wait = WebDriverWait(browser, 10)
         rolladen = wait.until(EC.element_to_be_clickable((By.XPATH, id_stop)))
         rolladen.click()
+
