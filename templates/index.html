@@ -57,11 +57,13 @@
         let xhr = new XMLHttpRequest();
         xhr.open("POST", {{ url_for("toggle_light") }}, true);
         xhr.send(null);
+        updateStatus("{{ url_for("get_status_light") }}", "status_light");
     }
     function toggle_steckdose() {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", {{ url_for("toggle_steckdose_url") }}, true);
         xhr.send(null);
+        updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");
     }
     function updateStatus(url, id){
         let status = document.getElementById(id)
@@ -70,8 +72,8 @@
         xhr.send(null);
         status.innerText = xhr.responseText
     }
-    //setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 100_000);
-    //setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 100_000);
+    setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 100_000);
+    setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 100_000);
 </script>
 </body>
 </html>
