@@ -1,0 +1,29 @@
+{% extends "smart_home_device_basis.html" %}
+{% block title %}Großer Rolladen im Wohnzimmer{% endblock %}
+{% block content %}
+    <div class="col-12">
+        <h4 id="rolladen_loading"></h4>
+
+        <div class="row mt-5">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-12 text-center my-2">
+                <button class="w-75 mx-1 btn btn-primary" onclick="rolladen_big_living_room_stop();"><h4>Stopp</h4>
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-12 text-center my-2">
+                <button class="w-75 mx-1 btn btn-primary" onclick="rolladen_big_living_room_runter();"><h4>Runter</h4>
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-12 text-center my-2">
+                <button class="w-75 mx-1 btn btn-primary" onclick="rolladen_big_living_room_hoch();"><h4>Hoch</h4>
+                </button>
+            </div>
+        </div>
+        <div class="row mt-2">
+        <form>
+            <label for="time_schedule">Zeit:</label>
+            <input class="form-control" id="time_schedule" type="time">
+        </form>
+
+        </div>
+    </div>
+{% endblock %}
