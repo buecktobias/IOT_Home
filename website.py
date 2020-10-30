@@ -121,7 +121,7 @@ def get_status_steckdose():
     else:
         return "OFF"
 
-
+#lol
 def load_rolladen():
     global r
     r = Rolladen()
