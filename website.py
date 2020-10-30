@@ -132,7 +132,7 @@ def initialize_website():
     rolladen_loader = threading.Thread(target=load_rolladen)
     rolladen_loader.start()
 
-
+#lol
 def run_website():
     initialize_website()
     print("Start website")
