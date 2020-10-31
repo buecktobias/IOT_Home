@@ -84,9 +84,9 @@ def rolladen_big_living_room_stop():
 def is_rolladen_big_living_room_loaded():
     global rolladen_loader
     if rolladen_loader.is_alive():
-        return "is still Loading"
+        return "0"
     else:
-        return "is ready!"
+        return "1"
 
 
 @app.route("/rolladen_small_living_room/up/", methods=["POST", "GET"])

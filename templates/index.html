@@ -50,11 +50,29 @@
     function updateStatus(url, id){
         let status = document.getElementById(id)
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", url, false);
+        xhr.open("GET", url, true);
         xhr.send(null);
-        status.innerText = xhr.responseText
+        xhr.onload = function() {
+            status.innerText = xhr.responseText
+        }
     }
-    setInterval(function(){ updateStatus("{{ url_for("is_rolladen_big_living_room_loaded") }}", "rolladen_loading")}, 400)
+
+    function rolladen_loading(url, id){
+        let status = document.getElementById(id)
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.send(null);
+        xhr.onload = function() {
+            if (xhr.responseText == "0"){
+                status.innerText = "Is still loading"
+                status.classList = ["text-danger"]
+            }else{
+                status.innerText = "Is ready"
+                status.classList = ["text-success"]
+            }
+        }
+    }
+    setInterval(function(){ rolladen_loading("{{ url_for("is_rolladen_big_living_room_loaded") }}", "rolladen_loading")}, 400)
     setInterval(function() {updateStatus("{{ url_for("get_status_light") }}", "status_light");}, 10_000);
     setInterval(function(){updateStatus("{{ url_for("get_status_steckdose") }}", "status_steckdose");}, 10_000);
 </script>
